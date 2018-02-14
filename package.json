@@ -1,16 +1,16 @@
 {
-  "name": "pods-webpack-plugin",
+  "name": "@rabbitcc/pods-webpack-plugin",
   "version": "0.0.1",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
     "start": "yarn build",
-    "prepublish": "yarn test && yarn build:prod",
+    "prepublish": "yarn test && yarn build:prod && yarn build:type",
     "build": "cross-env NODE_ENV=development yarn rollup -c",
     "build:prod": "cross-env NODE_ENV=production yarn rollup -c",
     "build:type": "flow gen-flow-files src/index.js > lib/pods-webpack-plugin.js.flow",
     "test": "jest",
-    "test:coverage": "yarn test --coverage",
+    "test:co": "yarn test --coverage",
     "test:type": "flow check"
   },
   "keywords": [],

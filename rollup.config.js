@@ -30,6 +30,7 @@ export default [{
       commonjs()
     ),
     external: [].concat(
+      'path',
       Object.keys(Object.assign(
         {},
         pkg.dependencies,
