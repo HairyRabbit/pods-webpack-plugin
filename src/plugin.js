@@ -9,6 +9,7 @@ import DefaultOptions from './defaultOptions'
 import checkPrefix from './prefixChecker'
 import isTypeRegister from './isTypeRegister'
 import resolveTypeExt from './extResolver'
+import sliceLoaderPath from './loaderPathResolver'
 import type { Compiler } from 'webpack/lib/Compiler'
 import type { Options } from './'
 
@@ -38,12 +39,13 @@ new PodsPlugin({
 
     compiler.plugin('normal-module-factory', nmf => {
       nmf.plugin('before-resolve', (data, callback) => {
-        if(!data.request.startsWith('@/')) {
+        const [ prefix, request ] = sliceLoaderPath(data.request)
+        if(!request.startsWith('@/')) {
           callback(null, data)
           return
         }
 
-        const [_, type, ...file] = data.request.split('/')
+        const [_, type, ...file] = request.split('/')
         if(!isTypeRegister(this.options.dir, type)) {
           if(this.options.warning) {
             console.warn(`The path ${data.request} matched prefix, \
@@ -61,7 +63,7 @@ new PodsPlugin({
           return
         }
         const ext = resolveTypeExt(this.options.dir, type)
-        data.request = path.resolve(context, `${file.join('/')}/${type}${ext}`)
+        data.request = prefix + path.resolve(context, `${file.join('/')}/${type}${ext}`)
         callback(null, data)
       })
     })
