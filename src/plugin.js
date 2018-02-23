@@ -10,7 +10,7 @@ import checkPrefix from './prefixChecker'
 import isTypeRegister from './isTypeRegister'
 import resolveTypeExt from './extResolver'
 import sliceLoaderPath from './loaderPathResolver'
-import type { Compiler } from 'webpack/lib/Compiler'
+import type { Compiler } from 'webpack'
 import type { Options } from './'
 
 export default class PodsWebpackPlugin {

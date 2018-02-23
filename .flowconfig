@@ -5,6 +5,7 @@
 <PROJECT_ROOT>/bin/.*
 <PROJECT_ROOT>/tests/.*
 <PROJECT_ROOT>/specs/.*
+<PROJECT_ROOT>/node_modules/.*
 
 
 [include]
